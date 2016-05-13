@@ -1,3 +1,7 @@
 {
-    "ApiKey":"aKQA6BLRHTdgT6AmXvuHRtxr"
+    "ApiKey":"aKQA6BLRHTdgT6AmXvuHRtxr",
+    "test":{
+        "paymentId":"530b957f-c101-46f4-aa8d-3b9029089c87",
+        "presistantApi":false
+    }
 }

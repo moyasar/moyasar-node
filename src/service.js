@@ -6,17 +6,18 @@ export default class {
         this.baseUrl = baseUrl;
     }
 
-    sendRequest(subUrl, obj){
+    sendRequest(subUrl, verb, obj){
+
         let options =
             {
                 url: this.baseUrl + subUrl,
-                method: "GET",
+                method: verb,
                 auth: {
                     user: this.apiKey
                 },
-                json: obj
+                json:obj?obj:{}
             };
 
-        return request(options);
+            return request(options);
     }
 }

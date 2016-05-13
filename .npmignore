@@ -1,0 +1,5 @@
+src
+.babelarc
+.eslintrc
+test
+npm-debug.log
