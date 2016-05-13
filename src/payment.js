@@ -1,4 +1,3 @@
-import request from 'request';
 import Service from './service.js';
 
 export default class extends Service {
