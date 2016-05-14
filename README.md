@@ -10,7 +10,6 @@ var Moyasar = require('moyasar-javascript');
 
 var moyasar = new Moyasar.default('API KEY');
 
-
 ```
 
 ### Using payment gateway
@@ -46,8 +45,8 @@ moyasar.payment.pay({
     currency:"SAR",
     description: "EXAMPLE"
     }).then(function(payment){
-    // Your Logic
-        });
+    // Your logic
+});
 
 ```
 
@@ -57,11 +56,13 @@ moyasar.payment.pay({
 
 moyasar.payment.refund(id).then(function(payment){
     // Your logic
-        });
+});
+
 // OR
+
 moyasar.payment.refund(paymentObject).then(function(payment){
     // Your logic
-        });
+});
 
 ```
 
@@ -90,7 +91,7 @@ moyasar.invoice.create({
      description:"kindle paperwhite"
   }).then(function(invoice){
     // Your logic
-  });
+});
 
 
 ```
