@@ -2,3 +2,4 @@ node_modules
 lib
 *.swp
 npm-debug.log
+test.config.json
