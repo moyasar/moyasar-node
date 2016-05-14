@@ -88,7 +88,7 @@ moyasar.invoice.create({
      amount:60000,
      currency:"SAR",
      description:"kindle paperwhite"
-  }).then(invoice=>{
+  }).then(function(invoice){
     // Your logic
   });
 
