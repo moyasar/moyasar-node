@@ -18,7 +18,7 @@ describe('Payment API', ()=>{
 
     it('Make a payment',done=>{
 
-        done(); // Comment this line to run the test
+        return done(); // Comment this line to run the test
 
         moyasar.payment.attachSource({
             type:'creditcard',
@@ -48,7 +48,6 @@ describe('Payment API', ()=>{
     });
 
     it('Retreive a payment and refund it',done=>{
-        done(); // Comment this line to run the test
         moyasar.payment.fetch(config.test.paymentId).then(p=>{
             return moyasar.payment.refund(p).then(r=>{
                 assert(r.id);

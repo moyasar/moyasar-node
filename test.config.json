@@ -1,8 +1,7 @@
 {
-    "ApiKey":"aKQA6BLRHTdgT6AmXvuHRtxr",
+    "ApiKey":"MrtwozLJAuFmLKWWSaRaoaLX",
     "test":{
-        "paymentId":"530b957f-c101-46f4-aa8d-3b9029089c87",
-        "presistantApi":false,
-        "invoiceId":"zample"
+        "paymentId":"ddd372c9-4600-585f-b039-29c2004e49e0",
+        "invoiceId":"062c702d-2d47-5132-a39f-7cb401cdfc97"
     }
 }

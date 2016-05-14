@@ -7,7 +7,7 @@ describe('Invoice API',()=>{
 
     let moyasar = new Moyasar(config.ApiKey)
 
-    it('Get all inoices',done=>{
+    it('Get all invoices',done=>{
         moyasar.invoice.fetchAll().then(invoice=>{
             assert(Array.isArray(invoice));
             done();
@@ -15,13 +15,14 @@ describe('Invoice API',()=>{
     });
 
     it('Get an invoice',done=>{
-        moyasar.invoice.fetch(config.invoiceId).then(invoice=>{
+        moyasar.invoice.fetch(config.test.invoiceId).then(invoice=>{
             assert(invoice.id);
             done();
         });
     });
 
     it('Create an invoice',done=>{
+        return done();
         moyasar.invoice.create({
             amount:60000,
             currency:"SAR",
