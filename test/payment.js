@@ -18,22 +18,21 @@ describe('Payment API', ()=>{
 
     it('Make a payment',done=>{
 
-        return done(); // Comment this line to run the test
-
-        moyasar.payment.attachSource({
+        return done();
+        let source = {
             type:'creditcard',
             name:'Abdulaziz Nasser',
             number:4111111111111111,
             cvc:331,
             month:12,
             year:2017
-        });
+        };
 
         moyasar.payment.pay({
             amount:700,
             currency:'SAR',
-            description: "'bag payment'"
-        }).then(p=>{
+            description: 'bag payment'
+        },source).then(p=>{
             assert.ok(p.id);
             done();
         });

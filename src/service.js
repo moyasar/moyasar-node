@@ -18,6 +18,23 @@ export default class {
                 json:obj?obj:{}
             };
 
-            return request(options);
+            return request(options).catch(r=>{
+                if (r.statusCode >= 400 && r.statusCode < 500)
+                    {
+                        if (r.error.errors)
+                            console.error(...r.error.errors);
+                        r.message = r.error.message;
+                        throw r;
+                    }
+                else if (r.statusCode >= 500 && r.statusCode < 600)
+                    {
+                        let msg = `Please re-create the error and post it in issues page in SDK repository "https://github.com/moyasar/moyasar-javascript/issues"`;
+                        r.message = `Problem in the server`;
+                        throw r;
+                    }
+                else {
+                    throw r;
+                }
+            });
     }
 }

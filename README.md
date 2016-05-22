@@ -8,8 +8,11 @@ Moyasar Javascript wrapper lib
 
 var Moyasar = require('moyasar-javascript');
 
-var moyasar = new Moyasar.default('API KEY');
+var moyasar = new Moyasar('API KEY');
 
+// OR
+
+var moyasar = new (require('./lib/moyasar'))('API KEY');
 
 ```
 
@@ -17,7 +20,12 @@ var moyasar = new Moyasar.default('API KEY');
 #### Fetching payments
 ```javascript
 
-moyasar.payment.fetchAll().then(function(paymentsList){
+let options = {
+    page: Number,
+    per: Number
+}
+
+moyasar.payment.fetchAll(options).then(function(paymentsList){
     // Your logic
 });
 
@@ -32,20 +40,20 @@ moyasar.payment.fetch(id).then(function(payment){
 #### Making payment
 ```javascript
 
-moyasar.payment.attachSource({
+moyasar.payment.attachSource();
+
+moyasar.payment.pay({
+    amount:300,
+    currency:"SAR",
+    description: "EXAMPLE"
+    },{
      type:'creditcard',
      name:'Abdulaziz Nasser',
      number:4111111111111111,
      cvc:331,
      month:12,
      year:2017
-});
-
-moyasar.payment.pay({
-    amount:300,
-    currency:"SAR",
-    description: "EXAMPLE"
-    }).then(function(payment){
+}).then(function(payment){
     // Your Logic
         });
 
@@ -70,7 +78,12 @@ moyasar.payment.refund(paymentObject).then(function(payment){
 #### Fetching invoices
 ```javascript
 
-moyasar.invoice.fetchAll().then(function(invoicesList){
+let options = {
+    page: Number,
+    per: Number
+}
+
+moyasar.invoice.fetchAll(options).then(function(invoicesList){
     // Your logic
 });
 
