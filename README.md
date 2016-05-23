@@ -65,11 +65,13 @@ moyasar.payment.pay({
 
 moyasar.payment.refund(id).then(function(payment){
     // Your logic
-        });
+});
+
 // OR
+
 moyasar.payment.refund(paymentObject).then(function(payment){
     // Your logic
-        });
+});
 
 ```
 
@@ -103,7 +105,7 @@ moyasar.invoice.create({
      description:"kindle paperwhite"
   }).then(function(invoice){
     // Your logic
-  });
+});
 
 
 ```
