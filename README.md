@@ -12,7 +12,7 @@ var moyasar = new Moyasar('API KEY');
 
 // OR
 
-var moyasar = new (require('./lib/moyasar'))('API KEY');
+var moyasar = new (require('moyasar-javascript'))('API KEY');
 
 ```
 
@@ -25,7 +25,7 @@ let options = {
     per: Number
 }
 
-moyasar.payment.fetchAll(options).then(function(paymentsList){
+moyasar.payment.fetchAll(options.page, options.per).then(function(paymentsList){
     // Your logic
 });
 
@@ -40,20 +40,20 @@ moyasar.payment.fetch(id).then(function(payment){
 #### Making payment
 ```javascript
 
-moyasar.payment.attachSource();
-
-moyasar.payment.pay({
-    amount:300,
-    currency:"SAR",
-    description: "EXAMPLE"
-    },{
+var source = {
      type:'creditcard',
      name:'Abdulaziz Nasser',
      number:4111111111111111,
      cvc:331,
      month:12,
      year:2017
-}).then(function(payment){
+};
+
+moyasar.payment.pay({
+    amount:300,
+    currency:"SAR",
+    description: "EXAMPLE"
+    },source).then(function(payment){
     // Your Logic
         });
 
@@ -85,7 +85,7 @@ let options = {
     per: Number
 }
 
-moyasar.invoice.fetchAll(options).then(function(invoicesList){
+moyasar.invoice.fetchAll(options.page, options.per).then(function(invoicesList){
     // Your logic
 });
 
