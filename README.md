@@ -60,7 +60,7 @@ moyasar.payment.pay({
 ```
 
 
-#### Refund a payment (Not supported yet)
+#### Refund a payment
 ```javascript
 
 moyasar.payment.refund(id).then(function(payment){
