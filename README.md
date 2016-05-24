@@ -7,7 +7,7 @@ Moyasar Javascript wrapper lib
 ```javascript
 
 var Moyasar = require('moyasar-javascript');
-
+s
 var moyasar = new Moyasar('API KEY');
 
 // OR
@@ -39,8 +39,6 @@ moyasar.payment.fetch(id).then(function(payment){
 
 #### Making payment
 ```javascript
-
-var source = ;
 
 moyasar.payment.pay({
     amount:300,
