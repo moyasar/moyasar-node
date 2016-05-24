@@ -18,21 +18,19 @@ describe('Payment API', ()=>{
 
     it('Make a payment',done=>{
 
-        return done();
-        let source = {
-            type:'creditcard',
-            name:'Abdulaziz Nasser',
-            number:4111111111111111,
-            cvc:331,
-            month:12,
-            year:2017
-        };
-
         moyasar.payment.pay({
             amount:700,
             currency:'SAR',
-            description: 'bag payment'
-        },source).then(p=>{
+            description: 'bag payment',
+            source:{
+                type:'creditcard',
+                name:'Abdulaziz Nasser',
+                number:4111111111111111,
+                cvc:331,
+                month:12,
+                year:2017
+            }
+        }).then(p=>{
             assert.ok(p.id);
             done();
         });

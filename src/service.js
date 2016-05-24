@@ -28,8 +28,9 @@ export default class {
                     }
                 else if (r.statusCode >= 500 && r.statusCode < 600)
                     {
-                        let msg = `Please re-create the error and post it in issues page in SDK repository "https://github.com/moyasar/moyasar-javascript/issues"`;
+                        let msg = '***** Please re-create the error and post it in issues page in SDK repository "https://github.com/moyasar/moyasar-node/issues  "';
                         r.message = `Problem in the server`;
+                        console.error(msg);
                         throw r;
                     }
                 else {

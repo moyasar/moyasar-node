@@ -22,7 +22,6 @@ describe('Invoice API',()=>{
     });
 
     it('Create an invoice',done=>{
-        return done();
         moyasar.invoice.create({
             amount:60000,
             currency:"SAR",

@@ -25,7 +25,7 @@ let options = {
     per: Number
 }
 
-moyasar.payment.fetchAll(options.page, options.per).then(function(paymentsList){
+moyasar.payment.fetchAll(options).then(function(paymentsList){
     // Your logic
 });
 
@@ -40,22 +40,22 @@ moyasar.payment.fetch(id).then(function(payment){
 #### Making payment
 ```javascript
 
-var source = {
+var source = ;
+
+moyasar.payment.pay({
+    amount:300,
+    currency:"SAR",
+    description: "EXAMPLE",
+    source: {
      type:'creditcard',
      name:'Abdulaziz Nasser',
      number:4111111111111111,
      cvc:331,
      month:12,
      year:2017
-};
-
-moyasar.payment.pay({
-    amount:300,
-    currency:"SAR",
-    description: "EXAMPLE"
-    },source).then(function(payment){
+}).then(function(payment){
     // Your Logic
-        });
+});
 
 ```
 
@@ -85,7 +85,7 @@ let options = {
     per: Number
 }
 
-moyasar.invoice.fetchAll(options.page, options.per).then(function(invoicesList){
+moyasar.invoice.fetchAll(options).then(function(invoicesList){
     // Your logic
 });
 
