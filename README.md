@@ -7,7 +7,7 @@ Moyasar Javascript wrapper lib
 ```javascript
 
 var Moyasar = require('moyasar-javascript');
-s
+
 var moyasar = new Moyasar('API KEY');
 
 // OR
