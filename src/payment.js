@@ -1,9 +1,10 @@
-import request from 'request';
 import Service from './service.js';
 
 export default class extends Service {
-    fetchAll(){
-        return this.sendRequest('payments','GET').then(res=>{
+    fetchAll(options = {page : 1,per : 20}){
+        if (options.per < 1 || options.per > 100)
+            throw new Error('Per must be between 1 and 100');
+        return this.sendRequest(`payments?page=${options.page}&per=${options.per}`,'GET').then(res=>{
             return res.payments;
         });
     }
@@ -24,14 +25,9 @@ export default class extends Service {
         return this.sendRequest('payments/'+id+'/refund','POST');
         
     }
-    
-    attachSource(source){
-        this.source = source;
-        this.source.number = String(this.source.number);
-    }
 
     pay(receipt){
-        receipt.source = this.source;
+        receipt.source.number = String(receipt.source.number);
         return this.sendRequest('payments','POST',receipt).then(res=>{
             return res;
         })

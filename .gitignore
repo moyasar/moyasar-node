@@ -1,3 +1,5 @@
 node_modules
-dist
+lib
 *.swp
+npm-debug.log
+test.config.json
