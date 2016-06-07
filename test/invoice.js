@@ -8,7 +8,7 @@ describe('Invoice API',()=>{
     let moyasar = new Moyasar(config.ApiKey)
 
     it('Get all invoices',done=>{
-        moyasar.invoice.fetchAll().then(invoice=>{
+        moyasar.invoice.list().then(invoice=>{
             assert(Array.isArray(invoice));
             done();
         });
