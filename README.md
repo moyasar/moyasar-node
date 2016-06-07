@@ -25,7 +25,7 @@ let options = {
     per: Number
 }
 
-moyasar.payment.fetchAll(options).then(function(paymentsList){
+moyasar.payment.list(options).then(function(paymentsList){
     // Your logic
 });
 
@@ -40,7 +40,7 @@ moyasar.payment.fetch(id).then(function(payment){
 #### Making payment
 ```javascript
 
-moyasar.payment.pay({
+moyasar.payment.create({
     amount:300,
     currency:"SAR",
     description: "EXAMPLE",
@@ -83,7 +83,7 @@ let options = {
     per: Number
 }
 
-moyasar.invoice.fetchAll(options).then(function(invoicesList){
+moyasar.invoice.list(options).then(function(invoicesList){
     // Your logic
 });
 
