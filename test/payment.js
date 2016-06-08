@@ -9,7 +9,7 @@ describe('Payment API', ()=>{
 
     it('Get All Payments',done=>{
 
-        moyasar.payment.fetchAll().then(payments=>{
+        moyasar.payment.list().then(payments=>{
             assert.equal(Array.isArray(payments),true);
             done();
         });
@@ -18,7 +18,7 @@ describe('Payment API', ()=>{
 
     it('Make a payment',done=>{
 
-        moyasar.payment.pay({
+        moyasar.payment.create({
             amount:700,
             currency:'SAR',
             description: 'bag payment',
