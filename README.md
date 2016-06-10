@@ -1,18 +1,23 @@
-# moyasar-javascript
-Moyasar Javascript wrapper lib
+# moyasar-node
+Moyasar Node.js wrapper lib
 
 ## Getting Started
+
+### installation
+```sh
+$ npm install moyasar-node
+```
 
 ### Setup Keys
 ```javascript
 
-var Moyasar = require('moyasar-javascript');
+var Moyasar = require('moyasar-node');
 
 var moyasar = new Moyasar('API KEY');
 
 // OR
 
-var moyasar = new (require('moyasar-javascript'))('API KEY');
+var moyasar = new (require('moyasar-node'))('API KEY');
 
 ```
 

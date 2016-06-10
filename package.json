@@ -1,9 +1,10 @@
 {
-  "name": "moyasar-javascript",
-  "version": "0.1.0",
-  "description": "Moyasar javascript SDK",
+  "name": "moyasar-node",
+  "version": "0.3.1",
+  "description": "Moyasar node SDK",
   "main": "lib/moyasar.js",
   "scripts": {
+    "prepublish": "babel src -d lib",
     "start": "nodemon src/moyasar.js --exec babel-node",
     "build": "babel src -d lib",
     "shell": "nodemon src/shell.js --exec babel-node",
@@ -11,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/moyasar/moyasar-javascript.git"
+    "url": "git+https://github.com/moyasar/moyasar-node.git"
   },
   "author": "Abdullah Dahmash",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/moyasar/moyasar-javascript/issues"
+    "url": "https://github.com/moyasar/moyasar-node/issues"
   },
-  "homepage": "https://github.com/moyasar/moyasar-javascript#readme",
+  "homepage": "https://github.com/moyasar/moyasar-node#readme",
   "devDependencies": {
     "babel-cli": "^6.8.0",
     "babel-plugin-add-module-exports": "^0.2.1",
