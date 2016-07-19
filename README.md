@@ -10,6 +10,6 @@ $ npm install moyasar-node
 
 ## Complete docs
 
-https://moyasar.com/docs/api/
+https://moyasar.com/docs/api/?javascript
 
 
