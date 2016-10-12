@@ -5,11 +5,9 @@ Moyasar Node.js wrapper lib
 
 ### installation
 ```sh
-$ npm install moyasar-node
+$ npm install moyasar
 ```
 
 ## Complete docs
 
 https://moyasar.com/docs/api/?javascript
-
-
