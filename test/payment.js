@@ -164,26 +164,26 @@ describe('Payment API', () => {
       }
     });
     fakeServer.post('/payments/d256ac99-ada1-5ef3-ab00-8e837b54ad5f/refund').basicAuth(basicAuth).reply(200, {
-      id: '0ef3c537-9266-4433-a6be-4a8ffc5cdea4',
+      id: 'd256ac99-ada1-5ef3-ab00-8e837b54ad5f',
       status: 'refunded',
-      amount: 300,
+      amount: 23097,
       fee: 0,
-      currency: 'SAR',
+      currency: "SAR",
       refunded: 300,
       refunded_at: '2016-06-25T22:09:52.467Z',
       description: null,
-      amount_format: '3.00 SAR',
-      fee_format: '0.00 SAR',
-      invoice_id: null,
-      ip: '',
-      created_at: '2016-06-25T21:36:47.972Z',
-      updated_at: '2016-06-25T22:09:52.468Z',
+      amount_format: "230.97 SAR",
+      fee_format: "0.00 SAR",
+      invoice_id: "495e3cfd-abe1-5c48-bb05-aeb009548830",
+      ip: null,
+      created_at: "2016-03-21T19:25:35.093Z",
+      updated_at: "2016-03-21T19:25:35.093Z",
       source: {
-        type: 'creditcard',
-        company: 'visa',
-        name: 'Abdulaziz Nasser',
-        number: 'XXXX-XXXX-XXXX-1111',
-        message: 'Succeeded!'
+        type: "creditcard",
+        company: "visa",
+        name: "Abdulaziz AlShetwi",
+        number: "XXXX-XXXX-XXXX-1111",
+        message: null
       }
     });
     moyasar.payment.fetch("d256ac99-ada1-5ef3-ab00-8e837b54ad5f").then(p => {
@@ -193,6 +193,119 @@ describe('Payment API', () => {
         done();
         return r;
       });
+    })
+  })
+
+  it('Fetch and update payment', done => {
+    fakeServer.get('/payments/d256ac99-ada1-5ef3-ab00-8e837b54ad5f').basicAuth(basicAuth).reply(200, {
+      "id": "d256ac99-ada1-5ef3-ab00-8e837b54ad5f",
+      "status": "paid",
+      "amount": 23097,
+      "fee": 0,
+      "currency": "SAR",
+      "refunded": 0,
+      "refunded_at": null,
+      "description": null,
+      "amount_format": "230.97 SAR",
+      "fee_format": "0.00 SAR",
+      "invoice_id": "495e3cfd-abe1-5c48-bb05-aeb009548830",
+      "ip": null,
+      "created_at": "2016-03-21T19:25:35.093Z",
+      "updated_at": "2016-03-21T19:25:35.093Z",
+      "source": {
+        "type": "creditcard",
+        "company": "visa",
+        "name": "Abdulaziz AlShetwi",
+        "number": "XXXX-XXXX-XXXX-1111",
+        "message": null
+      }
+    });
+    fakeServer.put('/payments/d256ac99-ada1-5ef3-ab00-8e837b54ad5f').basicAuth(basicAuth).reply(200, {
+      id: 'd256ac99-ada1-5ef3-ab00-8e837b54ad5f',
+      status: 'refunded',
+      amount: 50000,
+      fee: 0,
+      currency: "SAR",
+      refunded: 300,
+      refunded_at: '2016-06-25T22:09:52.467Z',
+      description: null,
+      amount_format: "230.97 SAR",
+      fee_format: "0.00 SAR",
+      invoice_id: "495e3cfd-abe1-5c48-bb05-aeb009548830",
+      ip: null,
+      created_at: "2016-03-21T19:25:35.093Z",
+      updated_at: "2016-03-21T19:25:35.093Z",
+      source: {
+        type: "creditcard",
+        company: "visa",
+        name: "Abdulaziz AlShetwi",
+        number: "XXXX-XXXX-XXXX-1111",
+        message: null
+      }
+    });
+    moyasar.payment.fetch("d256ac99-ada1-5ef3-ab00-8e837b54ad5f").then(p => {
+      return moyasar.payment.update({id: p.id, amount: 50000}).then(r => {
+        assert(r.id);
+        assert.notEqual(r.amount, p.amount); // not zero
+        done();
+        return r;
+      });
+    })
+  })
+
+  it('Throw error when fetch and update payment without id', done => {
+    fakeServer.get('/payments/d256ac99-ada1-5ef3-ab00-8e837b54ad5f').basicAuth(basicAuth).reply(200, {
+      "id": "d256ac99-ada1-5ef3-ab00-8e837b54ad5f",
+      "status": "paid",
+      "amount": 23097,
+      "fee": 0,
+      "currency": "SAR",
+      "refunded": 0,
+      "refunded_at": null,
+      "description": null,
+      "amount_format": "230.97 SAR",
+      "fee_format": "0.00 SAR",
+      "invoice_id": "495e3cfd-abe1-5c48-bb05-aeb009548830",
+      "ip": null,
+      "created_at": "2016-03-21T19:25:35.093Z",
+      "updated_at": "2016-03-21T19:25:35.093Z",
+      "source": {
+        "type": "creditcard",
+        "company": "visa",
+        "name": "Abdulaziz AlShetwi",
+        "number": "XXXX-XXXX-XXXX-1111",
+        "message": null
+      }
+    });
+    fakeServer.put('/payments/d256ac99-ada1-5ef3-ab00-8e837b54ad5f').basicAuth(basicAuth).reply(200, {
+      id: 'd256ac99-ada1-5ef3-ab00-8e837b54ad5f',
+      status: 'refunded',
+      amount: 50000,
+      fee: 0,
+      currency: "SAR",
+      refunded: 300,
+      refunded_at: '2016-06-25T22:09:52.467Z',
+      description: null,
+      amount_format: "230.97 SAR",
+      fee_format: "0.00 SAR",
+      invoice_id: "495e3cfd-abe1-5c48-bb05-aeb009548830",
+      ip: null,
+      created_at: "2016-03-21T19:25:35.093Z",
+      updated_at: "2016-03-21T19:25:35.093Z",
+      source: {
+        type: "creditcard",
+        company: "visa",
+        name: "Abdulaziz AlShetwi",
+        number: "XXXX-XXXX-XXXX-1111",
+        message: null
+      }
+    });
+    moyasar.payment.fetch("d256ac99-ada1-5ef3-ab00-8e837b54ad5f").then(p => {
+
+      assert.throws(() => {
+        moyasar.payment.update({amount: 50000})
+      }, Error);
+      done();
     })
   })
 

@@ -127,4 +127,44 @@ describe('Invoice API', () => {
       });
     });
   });
+
+  it('Throw error when update an invoice without id and with get', done => {
+    fakeServer.get('/invoices/37a54bed-7d54-444c-a151-c287106da514').basicAuth(basicAuth).reply(200, {
+      "id": "37a54bed-7d54-444c-a151-c287106da514",
+      "status": "initiated",
+      "amount": 60000,
+      "status": "initiated",
+      "currency": "SAR",
+      "description": "kindle paperwhite",
+      "logo_url": "https://api.moyasar.com/system/entities/logos/1a0/f5e/12-/original/data?1460010062",
+      "amount_format": "600.00 SAR",
+      "url": "http://dashboard.moyasar.com/invoices/37a54bed-7d54-444c-a151-c287106da514",
+      "created_at": "2016-04-06T21:45:18.866Z",
+      "updated_at": "2016-04-06T21:45:18.866Z",
+      "payments": []
+    });
+    fakeServer.put('/invoices/37a54bed-7d54-444c-a151-c287106da514').basicAuth(basicAuth).reply(200, {
+      "id": "37a54bed-7d54-444c-a151-c287106da514",
+      "status": "initiated",
+      "amount": 20000,
+      "status": "initiated",
+      "currency": "SAR",
+      "description": "kindle paperwhite",
+      "logo_url": "https://api.moyasar.com/system/entities/logos/1a0/f5e/12-/original/data?1460010062",
+      "amount_format": "600.00 SAR",
+      "url": "http://dashboard.moyasar.com/invoices/37a54bed-7d54-444c-a151-c287106da514",
+      "created_at": "2016-04-06T21:45:18.866Z",
+      "updated_at": "2016-04-06T21:45:18.866Z",
+      "payments": []
+    });
+    moyasar.invoice.fetch('37a54bed-7d54-444c-a151-c287106da514').then(invoice => {
+      invoice.amount = 20000;
+      assert.throws(() => {
+        moyasar.invoice.update({
+          amount: 20000
+        });
+      }, Error);
+      done();
+    });
+  })
 })

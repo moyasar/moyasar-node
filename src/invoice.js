@@ -12,10 +12,19 @@ export default class extends Service {
     fetch(id){
         return this.sendRequest('invoices/' +id);
     }
-    
+
     create(receipt){
         return this.sendRequest('invoices','POST',receipt).then(res=>{
             return res;
         })
+    }
+
+    update(invoice){
+      if (typeof invoice.id != "string") {
+        throw new Error('Invoice object does not have id');
+      }
+      return this.sendRequest('invoices/'+ invoice.id ,'PUT',invoice).then(res=>{
+          return res;
+      })
     }
 }
