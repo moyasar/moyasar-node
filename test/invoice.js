@@ -4,7 +4,7 @@ import {moyasar, fakeServer, basicAuth} from './helpers';
 describe('Invoice API', () => {
 
   it('Get all invoices', done => {
-    fakeServer.get('/invoices?page=1&per=20').basicAuth(basicAuth).reply(200, {
+    fakeServer.get('/invoices').query(true).basicAuth(basicAuth).reply(200, {
       "invoices": [
         {
           "id": "37a54bed-7d54-444c-a151-c287106da514",
@@ -43,6 +43,7 @@ describe('Invoice API', () => {
     moyasar.invoice.list().then(invoice => {
       assert(Array.isArray(invoice));
       done();
+      fakeServer.isDone();
     });
   });
 
@@ -64,6 +65,7 @@ describe('Invoice API', () => {
     moyasar.invoice.fetch('37a54bed-7d54-444c-a151-c287106da514').then(invoice => {
       assert(invoice.id);
       done();
+      fakeServer.isDone();
     });
   });
 
@@ -84,6 +86,7 @@ describe('Invoice API', () => {
     moyasar.invoice.create({amount: 60000, currency: "SAR", description: "kindle paperwhite"}).then(invoice => {
       assert(invoice.id);
       done();
+      fakeServer.isDone();
     });
   });
 
@@ -108,7 +111,7 @@ describe('Invoice API', () => {
       "amount": 20000,
       "status": "initiated",
       "currency": "SAR",
-      "description": "kindle paperwhite",
+      "description": "new description",
       "logo_url": "https://api.moyasar.com/system/entities/logos/1a0/f5e/12-/original/data?1460010062",
       "amount_format": "600.00 SAR",
       "url": "http://dashboard.moyasar.com/invoices/37a54bed-7d54-444c-a151-c287106da514",
@@ -117,13 +120,13 @@ describe('Invoice API', () => {
       "payments": []
     });
     moyasar.invoice.fetch('37a54bed-7d54-444c-a151-c287106da514').then(invoice => {
-      invoice.amount = 20000;
       moyasar.invoice.update({
         id: invoice.id,
-        amount: 20000
+        description: "new description",
       }).then(newInvoice => {
-        assert.equal(newInvoice.amount, 20000);
+        assert.equal(newInvoice.description, "new description");
         done();
+        fakeServer.isDone();
       });
     });
   });
@@ -149,7 +152,7 @@ describe('Invoice API', () => {
       "amount": 20000,
       "status": "initiated",
       "currency": "SAR",
-      "description": "kindle paperwhite",
+      "description": "new description",
       "logo_url": "https://api.moyasar.com/system/entities/logos/1a0/f5e/12-/original/data?1460010062",
       "amount_format": "600.00 SAR",
       "url": "http://dashboard.moyasar.com/invoices/37a54bed-7d54-444c-a151-c287106da514",
@@ -158,13 +161,13 @@ describe('Invoice API', () => {
       "payments": []
     });
     moyasar.invoice.fetch('37a54bed-7d54-444c-a151-c287106da514').then(invoice => {
-      invoice.amount = 20000;
       assert.throws(() => {
         moyasar.invoice.update({
-          amount: 20000
+          description: "new description",
         });
       }, Error);
       done();
+      fakeServer.isDone();
     });
   })
 })

@@ -4,7 +4,7 @@ import {moyasar, fakeServer, basicAuth} from './helpers';
 describe('Payment API', () => {
 
   it('Get All Payments', done => {
-    fakeServer.get('/payments?page=1&per=20').basicAuth(basicAuth).reply(200, {
+    fakeServer.get('/payments').query(true).basicAuth(basicAuth).reply(200, {
       "payments": [
         {
           "id": "04b1ff8a-03c6-5ab2-889b-4d264fda0853",
@@ -64,6 +64,7 @@ describe('Payment API', () => {
     moyasar.payment.list().then(payments => {
       assert.equal(Array.isArray(payments), true);
       done();
+      fakeServer.isDone();
     });
   });
 
@@ -105,6 +106,7 @@ describe('Payment API', () => {
     }).then(p => {
       assert.ok(p.id);
       done();
+      fakeServer.isDone();
     });
 
   });
@@ -136,6 +138,7 @@ describe('Payment API', () => {
     moyasar.payment.fetch("d256ac99-ada1-5ef3-ab00-8e837b54ad5f").then(p => {
       assert(p.id);
       done();
+      fakeServer.isDone();
     });
   });
 
@@ -191,6 +194,7 @@ describe('Payment API', () => {
         assert(r.id);
         assert(r.refunded); // not zero
         done();
+        fakeServer.isDone();
         return r;
       });
     })
@@ -228,7 +232,7 @@ describe('Payment API', () => {
       currency: "SAR",
       refunded: 300,
       refunded_at: '2016-06-25T22:09:52.467Z',
-      description: null,
+      description: "new description",
       amount_format: "230.97 SAR",
       fee_format: "0.00 SAR",
       invoice_id: "495e3cfd-abe1-5c48-bb05-aeb009548830",
@@ -244,10 +248,11 @@ describe('Payment API', () => {
       }
     });
     moyasar.payment.fetch("d256ac99-ada1-5ef3-ab00-8e837b54ad5f").then(p => {
-      return moyasar.payment.update({id: p.id, amount: 50000}).then(r => {
+      return moyasar.payment.update({id: p.id, description: "new description"}).then(r => {
         assert(r.id);
         assert.notEqual(r.amount, p.amount); // not zero
         done();
+        fakeServer.isDone();
         return r;
       });
     })
@@ -303,9 +308,10 @@ describe('Payment API', () => {
     moyasar.payment.fetch("d256ac99-ada1-5ef3-ab00-8e837b54ad5f").then(p => {
 
       assert.throws(() => {
-        moyasar.payment.update({amount: 50000})
+        moyasar.payment.update({description: "new description"})
       }, Error);
       done();
+      fakeServer.isDone();
     })
   })
 
