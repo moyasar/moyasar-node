@@ -19,11 +19,11 @@ export default class extends Service {
             id = receipt.id;
         else if (typeof receipt == "string")
             id = receipt;
-        else 
+        else
             throw new Error("Please provide a valid payment object or payment id");
-        
+
         return this.sendRequest('payments/'+id+'/refund','POST');
-        
+
     }
 
     create(receipt){
@@ -31,5 +31,14 @@ export default class extends Service {
         return this.sendRequest('payments','POST',receipt).then(res=>{
             return res;
         })
+    }
+
+    update(payment){
+      if (typeof payment.id != "string") {
+        throw new Error('Payment object does not have id');
+      }
+      return this.sendRequest('payments/'+ payment.id ,'PUT',payment).then(res=>{
+          return res;
+      })
     }
 }
