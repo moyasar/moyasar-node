@@ -8,7 +8,8 @@
     "start": "nodemon src/moyasar.js --exec babel-node",
     "build": "babel src -d lib",
     "shell": "nodemon src/shell.js --exec babel-node",
-    "test": "nodemon --ext js --watch ./ --exec 'mocha --compilers js:babel-register' --delay 1"
+    "test": "mocha --compilers js:babel-register",
+    "test:watch": "mocha --compilers js:babel-register --watch"
   },
   "repository": {
     "type": "git",
@@ -27,7 +28,7 @@
     "babel-preset-stage-2": "^6.5.0",
     "babel-register": "^6.8.0",
     "mocha": "^2.4.5",
-    "nodemon": "^1.9.2"
+    "nock": "^8.1.0"
   },
   "dependencies": {
     "request-promise": "^3.0.0"
