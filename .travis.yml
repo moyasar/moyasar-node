@@ -1,6 +1,11 @@
 language: node_js
 node_js:
-  - "6"
-  - "6.1"
-  - "5.11"
-  - "iojs"
+- '6'
+- '6.1'
+- '5.11'
+- iojs
+deploy:
+  api_key:
+    secure: gRpU4PpCX0IpM148c666+KIQ57xLivkN7s+uJ+h3bx/9WXB0OUKS7cSJ89TMGbtIKXXmeb3YoHrKThlTSxM4PEr4pcWJH+5t+CmDd63fesBI8HsnCrIunXkeRwfaMnTqJNaGhDPtUA06icJkCXGKcJHJeAXYk1zZqEwAtyLNkBf7VBdYnx7kUD8TKd2RaMboIYg3oB3zrBY9XZbhtaM/GO2tVNTB372iBsuZszlGsf17rbO93bnxV5HsW6EG3+Dcj/cWlFJAmrNlhNSdHCiTa57Y5IqpRgxqoXqyZlxRxA0qV1llp4qfuU+Y0l7WGKEnCfvslnW/trod4ObjlVqZbeWiBFiGJGj+U3aapTz1LgGUkYxvU2q4lawJVLvgOYEqn3cwjLNfglIgnbdKW7wRZNQqr8M73IXFJLTHrCqYynV9Oc869LrO7VplaApLZp+zebWcGThaQsA+n66+xeMNEcTljBsD4pWVabLJobax/MHrY2Ly/T9PGgetigkoMneqtw2iiMHSSDi0YOqsFJTgmIiUli+7291Cmu1cTupB1W5kcPcovWThkCj+wJDZfwV7C0LKg8BzJanQNs5Etlg6/RcaviglSeNLXPVuVVWh6OIxCEJb56wtdfoQNap142EB6EYVQELGNPm79wv9tR4DaE9senAsqv0Yh8UIk1PM8Ag=
+  email: developers@moyasar.com
+  provider: npm
