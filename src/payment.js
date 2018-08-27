@@ -13,16 +13,25 @@ export default class extends Service {
         return this.sendRequest('payments/'+id);
     }
 
-    refund(receipt){
+    refund(receipt, option){
         let id;
+        let params = {};
         if (typeof receipt == "object" && receipt.id)
             id = receipt.id;
         else if (typeof receipt == "string")
             id = receipt;
         else
             throw new Error("Please provide a valid payment object or payment id");
-
-        return this.sendRequest('payments/'+id+'/refund','POST');
+        if (option && option.amount) {
+          if (!isNaN(parseFloat(option.amount)) && isFinite(option.amount)) {
+            params = {
+              amount: option.amount,
+            };
+          } else {
+            throw new Error("Please provide a valid amount"); 
+          }
+        }
+        return this.sendRequest('payments/'+id+'/refund','POST', params);
 
     }
 

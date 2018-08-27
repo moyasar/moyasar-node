@@ -200,6 +200,64 @@ describe('Payment API', () => {
     })
   })
 
+  it('Retreive a payment and refund it partially', done => {
+    fakeServer.get('/payments/d256ac99-ada1-5ef3-ab00-8e837b54ad5f').basicAuth(basicAuth).reply(200, {
+      "id": "d256ac99-ada1-5ef3-ab00-8e837b54ad5f",
+      "status": "paid",
+      "amount": 23097,
+      "fee": 0,
+      "currency": "SAR",
+      "refunded": 0,
+      "refunded_at": null,
+      "description": null,
+      "amount_format": "230.97 SAR",
+      "fee_format": "0.00 SAR",
+      "invoice_id": "495e3cfd-abe1-5c48-bb05-aeb009548830",
+      "ip": null,
+      "created_at": "2016-03-21T19:25:35.093Z",
+      "updated_at": "2016-03-21T19:25:35.093Z",
+      "source": {
+        "type": "creditcard",
+        "company": "visa",
+        "name": "Abdulaziz AlShetwi",
+        "number": "XXXX-XXXX-XXXX-1111",
+        "message": null
+      }
+    });
+    fakeServer.post('/payments/d256ac99-ada1-5ef3-ab00-8e837b54ad5f/refund', { amount: 300 }).basicAuth(basicAuth).reply(200, {
+      id: 'd256ac99-ada1-5ef3-ab00-8e837b54ad5f',
+      status: 'refunded',
+      amount: 23097,
+      fee: 0,
+      currency: "SAR",
+      refunded: 300,
+      refunded_at: '2016-06-25T22:09:52.467Z',
+      description: null,
+      amount_format: "230.97 SAR",
+      fee_format: "0.00 SAR",
+      invoice_id: "495e3cfd-abe1-5c48-bb05-aeb009548830",
+      ip: null,
+      created_at: "2016-03-21T19:25:35.093Z",
+      updated_at: "2016-03-21T19:25:35.093Z",
+      source: {
+        type: "creditcard",
+        company: "visa",
+        name: "Abdulaziz AlShetwi",
+        number: "XXXX-XXXX-XXXX-1111",
+        message: null
+      }
+    });
+    moyasar.payment.fetch("d256ac99-ada1-5ef3-ab00-8e837b54ad5f").then(p => {
+      return moyasar.payment.refund(p, { amount: 300 }).then(r => {
+        assert(r.id);
+        assert(r.refunded); // not zero
+        done();
+        fakeServer.isDone();
+        return r;
+      });
+    })
+  })
+
   it('Fetch and update payment', done => {
     fakeServer.get('/payments/d256ac99-ada1-5ef3-ab00-8e837b54ad5f').basicAuth(basicAuth).reply(200, {
       "id": "d256ac99-ada1-5ef3-ab00-8e837b54ad5f",

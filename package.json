@@ -1,6 +1,6 @@
 {
   "name": "moyasar",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Moyasar node SDK",
   "main": "lib/moyasar.js",
   "scripts": {
@@ -28,7 +28,7 @@
     "babel-preset-stage-2": "^6.5.0",
     "babel-register": "^6.8.0",
     "mocha": "^2.4.5",
-    "nock": "^8.1.0"
+    "nock": "^9.0.14"
   },
   "dependencies": {
     "request-promise": "^3.0.0"
