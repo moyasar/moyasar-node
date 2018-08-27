@@ -5,7 +5,6 @@
   "main": "lib/moyasar.js",
   "scripts": {
     "prepare": "./node_modules/.bin/babel src -d lib",
-    "start": "nodemon src/moyasar.js --exec babel-node",
     "build": "./node_modules/.bin/babel src -d lib",
     "shell": "nodemon src/shell.js --exec babel-node",
     "test": "mocha --compilers js:babel-register",
