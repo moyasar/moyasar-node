@@ -1,11 +1,10 @@
 {
   "name": "moyasar",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "description": "Moyasar node SDK",
   "main": "lib/moyasar.js",
   "scripts": {
-    "prepublish": "./node_modules/.bin/babel src -d lib",
-    "start": "nodemon src/moyasar.js --exec babel-node",
+    "prepare": "./node_modules/.bin/babel src -d lib",
     "build": "./node_modules/.bin/babel src -d lib",
     "shell": "nodemon src/shell.js --exec babel-node",
     "test": "mocha --compilers js:babel-register",
