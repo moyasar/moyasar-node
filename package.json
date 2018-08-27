@@ -1,6 +1,6 @@
 {
   "name": "moyasar",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "description": "Moyasar node SDK",
   "main": "lib/moyasar.js",
   "scripts": {
