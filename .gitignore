@@ -3,3 +3,4 @@ lib
 *.swp
 npm-debug.log
 test.config.json
+.DS_Store
