@@ -1,10 +1,8 @@
 language: node_js
 node_js:
 - 'node'
-before_script:
-- rm -rf ./node_modules package-lock.json
-- npm install
 deploy:
+  skip_cleanup: true
   provider: npm
   email: developers@moyasar.com
   api_key:
