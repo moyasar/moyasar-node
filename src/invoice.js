@@ -27,4 +27,12 @@ export default class extends Service {
           return res;
       })
     }
+    cancel(invoice){
+        if (typeof invoice.id != "string") {
+            throw new Error('Invoice object does not have id');
+        }
+        return this.sendRequest('invoices/'+ invoice.id +'/cancel','PUT',invoice).then(res=>{
+            return res;
+        })
+    }
 }
