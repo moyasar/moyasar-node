@@ -35,13 +35,6 @@ export default class extends Service {
 
     }
 
-    create(receipt){
-        receipt.source.number = String(receipt.source.number);
-        return this.sendRequest('payments','POST',receipt).then(res=>{
-            return res;
-        })
-    }
-
     update(payment){
       if (typeof payment.id != "string") {
         throw new Error('Payment object does not have id');
