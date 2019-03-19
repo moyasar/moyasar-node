@@ -68,49 +68,6 @@ describe('Payment API', () => {
     });
   });
 
-  it('Make a payment', done => {
-    fakeServer.post('/payments').basicAuth(basicAuth).reply(200, {
-      "id": "27607a32-c968-40f3-9eb9-7838d906f791",
-      "status": "paid",
-      "amount": 7000,
-      "fee": 0,
-      "currency": "SAR",
-      "refunded": 0,
-      "refunded_at": null,
-      "description": "bag payment",
-      "amount_format": "70.00 SAR",
-      "fee_format": "0.00 SAR",
-      "invoice_id": null,
-      "ip": null,
-      "created_at": "2016-03-21T19:25:35.093Z",
-      "updated_at": "2016-03-21T19:25:35.093Z",
-      "source": {
-        "type": "creditcard",
-        "company": "visa",
-        "name": "Abdulaziz Nasser",
-        "number": "XXXX-XXXX-XXXX-1111",
-        "message": null
-      }
-    });
-    moyasar.payment.create({
-      amount: 7000,
-      currency: 'SAR',
-      description: 'bag payment',
-      source: {
-        type: "creditcard",
-        company: "visa",
-        name: "Abdulaziz Nasser",
-        number: "XXXX-XXXX-XXXX-1111",
-        message: null
-      }
-    }).then(p => {
-      assert.ok(p.id);
-      done();
-      fakeServer.isDone();
-    });
-
-  });
-
   it('Retreive a payment ', done => {
     fakeServer.get('/payments/d256ac99-ada1-5ef3-ab00-8e837b54ad5f').basicAuth(basicAuth).reply(200, {
       "id": "d256ac99-ada1-5ef3-ab00-8e837b54ad5f",
