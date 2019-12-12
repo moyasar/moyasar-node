@@ -330,4 +330,219 @@ describe('Payment API', () => {
     })
   })
 
+  it('Fetch and capture payment', done => {
+    fakeServer.get('/payments/c66b4f66-9c85-4173-9ef5-797c31553174').basicAuth(basicAuth).reply(200, {
+      "id": "c66b4f66-9c85-4173-9ef5-797c31553174",
+      "status": "authorized",
+      "amount": 800,
+      "fee": 0,
+      "currency": "SAR",
+      "refunded": 0,
+      "refunded_at": null,
+      "captured": 0,
+      "captured_at": null,
+      "voided_at": null,
+      "description": null,
+      "amount_format": "8.00 SAR",
+      "fee_format": "0.00 SAR",
+      "refunded_format": "0.00 SAR",
+      "captured_format": "0.00 SAR",
+      "invoice_id": null,
+      "ip": null,
+      "callback_url": "https://www.example.com/site/payment_callback",
+      "created_at": "2019-12-12T07:21:27.309Z",
+      "updated_at": "2019-12-12T07:21:45.345Z",
+      "source": {
+        "type": "creditcard",
+        "company": "visa",
+        "name": "authcapt test",
+        "number": "XXXX-XXXX-XXXX-1111",
+        "message": "Succeeded!",
+        "transaction_url": "https://api.moyasar.com/v1/transaction_auths/5d76f380-4062-4ba3-86e2-7034fa5899a1/form"
+      }
+    });
+    fakeServer.post('/payments/c66b4f66-9c85-4173-9ef5-797c31553174/capture').basicAuth(basicAuth).reply(200, {
+      id: "c66b4f66-9c85-4173-9ef5-797c31553174",
+      status: "captured",
+      amount: 800,
+      fee: 0,
+      currency: "SAR",
+      refunded: 0,
+      refunded_at: null,
+      captured: 800,
+      captured_at: "2019-12-12T07:23:47.839Z",
+      voided_at: null,
+      description: null,
+      amount_format: "8.00 SAR",
+      fee_format: "0.00 SAR",
+      refunded_format: "0.00 SAR",
+      captured_format: "8.00 SAR",
+      invoice_id: null,
+      ip: null,
+      callback_url: "https://www.example.com/site/payment_callback",
+      created_at: "2019-12-12T07:21:27.309Z",
+      updated_at: "2019-12-12T07:23:47.841Z",
+      source: {
+        type: "creditcard",
+        company: "visa",
+        name: "authcapt test",
+        number: "XXXX-XXXX-XXXX-1111",
+        message: "Succeeded!",
+        transaction_url: "https://api.moyasar.com/v1/transaction_auths/5d76f380-4062-4ba3-86e2-7034fa5899a1/form"
+      }
+    });
+    moyasar.payment.fetch("c66b4f66-9c85-4173-9ef5-797c31553174").then(p => {
+      return moyasar.payment.capture(p).then(r => {
+        assert(r.id);
+        assert(r.captured); // not zero
+        done();
+        fakeServer.isDone();
+        return r;
+      });
+    })
+  })
+
+  it('Fetch and capture payment partially', done => {
+    fakeServer.get('/payments/c66b4f66-9c85-4173-9ef5-797c31553174').basicAuth(basicAuth).reply(200, {
+      "id": "c66b4f66-9c85-4173-9ef5-797c31553174",
+      "status": "authorized",
+      "amount": 800,
+      "fee": 0,
+      "currency": "SAR",
+      "refunded": 0,
+      "refunded_at": null,
+      "captured": 0,
+      "captured_at": null,
+      "voided_at": null,
+      "description": null,
+      "amount_format": "8.00 SAR",
+      "fee_format": "0.00 SAR",
+      "refunded_format": "0.00 SAR",
+      "captured_format": "0.00 SAR",
+      "invoice_id": null,
+      "ip": null,
+      "callback_url": "https://www.example.com/site/payment_callback",
+      "created_at": "2019-12-12T07:21:27.309Z",
+      "updated_at": "2019-12-12T07:21:45.345Z",
+      "source": {
+        "type": "creditcard",
+        "company": "visa",
+        "name": "authcapt test",
+        "number": "XXXX-XXXX-XXXX-1111",
+        "message": "Succeeded!",
+        "transaction_url": "https://api.moyasar.com/v1/transaction_auths/5d76f380-4062-4ba3-86e2-7034fa5899a1/form"
+      }
+    });
+    fakeServer.post('/payments/c66b4f66-9c85-4173-9ef5-797c31553174/capture').basicAuth(basicAuth).reply(200, {
+      id: "c66b4f66-9c85-4173-9ef5-797c31553174",
+      status: "captured",
+      amount: 800,
+      fee: 0,
+      currency: "SAR",
+      refunded: 0,
+      refunded_at: null,
+      captured: 500,
+      captured_at: "2019-12-12T07:23:47.839Z",
+      voided_at: null,
+      description: null,
+      amount_format: "8.00 SAR",
+      fee_format: "0.00 SAR",
+      refunded_format: "0.00 SAR",
+      captured_format: "5.00 SAR",
+      invoice_id: null,
+      ip: null,
+      callback_url: "https://www.example.com/site/payment_callback",
+      created_at: "2019-12-12T07:21:27.309Z",
+      updated_at: "2019-12-12T07:23:47.841Z",
+      source: {
+        type: "creditcard",
+        company: "visa",
+        name: "authcapt test",
+        number: "XXXX-XXXX-XXXX-1111",
+        message: "Succeeded!",
+        transaction_url: "https://api.moyasar.com/v1/transaction_auths/5d76f380-4062-4ba3-86e2-7034fa5899a1/form"
+      }
+    });
+    moyasar.payment.fetch("c66b4f66-9c85-4173-9ef5-797c31553174").then(p => {
+      return moyasar.payment.capture(p, { amount: 500 }).then(r => {
+        assert(r.id);
+        assert(r.captured); // not zero
+        done();
+        fakeServer.isDone();
+        return r;
+      });
+    })
+  })
+
+  it('Fetch and void payment', done => {
+    fakeServer.get('/payments/c66b4f66-9c85-4173-9ef5-797c31553174').basicAuth(basicAuth).reply(200, {
+      "id": "c66b4f66-9c85-4173-9ef5-797c31553174",
+      "status": "captured",
+      "amount": 800,
+      "fee": 0,
+      "currency": "SAR",
+      "refunded": 0,
+      "refunded_at": null,
+      "captured": 800,
+      "captured_at": "2019-12-12T07:23:47.839Z",
+      "voided_at": null,
+      "description": null,
+      "amount_format": "8.00 SAR",
+      "fee_format": "0.00 SAR",
+      "refunded_format": "0.00 SAR",
+      "captured_format": "8.00 SAR",
+      "invoice_id": null,
+      "ip": null,
+      "callback_url": "https://www.example.com/site/payment_callback",
+      "created_at": "2019-12-12T07:21:27.309Z",
+      "updated_at": "2019-12-12T07:21:45.345Z",
+      "source": {
+        "type": "creditcard",
+        "company": "visa",
+        "name": "authcapt test",
+        "number": "XXXX-XXXX-XXXX-1111",
+        "message": "Succeeded!",
+        "transaction_url": "https://api.moyasar.com/v1/transaction_auths/5d76f380-4062-4ba3-86e2-7034fa5899a1/form"
+      }
+    });
+    fakeServer.post('/payments/c66b4f66-9c85-4173-9ef5-797c31553174/void').basicAuth(basicAuth).reply(200, {
+      id: "c66b4f66-9c85-4173-9ef5-797c31553174",
+      status: "voided",
+      amount: 800,
+      fee: 0,
+      currency: "SAR",
+      refunded: 0,
+      refunded_at: null,
+      captured: 800,
+      captured_at: "2019-12-12T07:23:47.839Z",
+      voided_at: "2019-12-12T07:35:47.409Z",
+      description: null,
+      amount_format: "8.00 SAR",
+      fee_format: "0.00 SAR",
+      refunded_format: "0.00 SAR",
+      captured_format: "8.00 SAR",
+      invoice_id: null,
+      ip: null,
+      callback_url: "https://www.example.com/site/payment_callback",
+      created_at: "2019-12-12T07:21:27.309Z",
+      updated_at: "2019-12-12T07:23:47.841Z",
+      source: {
+        type: "creditcard",
+        company: "visa",
+        name: "authcapt test",
+        number: "XXXX-XXXX-XXXX-1111",
+        message: "Succeeded!",
+        transaction_url: "https://api.moyasar.com/v1/transaction_auths/5d76f380-4062-4ba3-86e2-7034fa5899a1/form"
+      }
+    });
+    moyasar.payment.fetch("c66b4f66-9c85-4173-9ef5-797c31553174").then(p => {
+      return moyasar.payment.void(p).then(r => {
+        assert(r.id);
+        done();
+        fakeServer.isDone();
+        return r;
+      });
+    })
+  })
+
 });

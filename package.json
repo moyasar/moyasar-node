@@ -1,6 +1,6 @@
 {
   "name": "moyasar",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Moyasar node SDK",
   "main": "lib/moyasar.js",
   "scripts": {
@@ -32,5 +32,6 @@
   "dependencies": {
     "request": "^2.88.0",
     "request-promise": "^4.2.2"
-  }
+  },
+  "resolutions": { "**/lodash": "^4.17.15" }
 }

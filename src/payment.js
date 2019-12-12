@@ -43,4 +43,34 @@ export default class extends Service {
           return res;
       })
     }
+
+    capture(payment, option){
+      let id;
+      let params = {};
+      if (typeof payment == "object" && payment.id)
+        id = payment.id;
+      else if (typeof payment == "string")
+        id = payment;
+      else
+        throw new Error("Please provide a valid payment object or payment id");
+      if (option && option.amount) {
+        if (!isNaN(parseFloat(option.amount)) && isFinite(option.amount)) {
+          params = {
+            amount: option.amount,
+          };
+        } else {
+          throw new Error("Please provide a valid amount"); 
+        }
+      }
+      return this.sendRequest('payments/'+id+'/capture','POST', params);
+    }
+
+    void(payment){
+      if (typeof payment.id != "string") {
+        throw new Error('Payment object does not have id');
+      }
+      return this.sendRequest('payments/'+ payment.id +'/void','POST',payment).then(res=>{
+        return res;
+      })
+    }
 }
