@@ -1,3 +1,5 @@
+# This project has been archived and is no longer maintained.
+
 # moyasar-node
 
 [![npm version](https://badge.fury.io/js/moyasar.svg)](https://badge.fury.io/js/moyasar)
